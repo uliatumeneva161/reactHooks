@@ -14,6 +14,7 @@ const initialState = {
     category: 'all',
     inStockOnly: false,
     maxPrice: 1000,
+    //  minPrice: 30
   },
   sortBy: 'name', // 'name' | 'price' | 'category'
 };
@@ -30,6 +31,7 @@ const ActionTypes = {
 
 // Редьюсер
 function shopReducer(state, action) {
+  
   switch (action.type) {
     case ActionTypes.ADD_TO_CART: {
       const product = state.products.find(p => p.id === action.productId);
@@ -73,7 +75,7 @@ function shopReducer(state, action) {
           ...action.payload,
         },
       };
-
+    
     case ActionTypes.CLEAR_FILTERS:
       return {
         ...state,
@@ -83,9 +85,9 @@ function shopReducer(state, action) {
     case ActionTypes.SORT_PRODUCTS:
       return {
         ...state,
-        sortBy: action.sortBy,
+        sortBy: action.sortBy
       };
-
+    
     default:
       return state;
   }
@@ -104,9 +106,11 @@ function filterAndSortProducts(products, filters, sortBy) {
     filtered = filtered.filter(p => p.inStock);
   }
   
-  filtered = filtered.filter(p => p.price <= filters.maxPrice);
+  filtered = filtered.filter(p => p.price <= filters.maxPrice
+    // && p.price >= filters.minPrice
+  );
 
-  // Сортируем
+ 
   switch (sortBy) {
     case 'price':
       return filtered.sort((a, b) => a.price - b.price);
@@ -115,6 +119,8 @@ function filterAndSortProducts(products, filters, sortBy) {
     default:
       return filtered.sort((a, b) => a.name.localeCompare(b.name));
   }
+
+ 
 }
 
 function UseReducer() {
@@ -134,10 +140,11 @@ function UseReducer() {
       <div className="filters">
         <h3>Фильтры</h3>
         <select
-          value={state.filters.category}
+          value={state.filters.category} //работает и без велъю
           onChange={(e) => dispatch({
             type: ActionTypes.APPLY_FILTER,
-            payload: { category: e.target.value }
+            payload: { category: e.target.value },
+        
           })}
         >
           <option value="all">Все категории</option>
@@ -164,7 +171,7 @@ function UseReducer() {
             type="range"
             min="0"
             max="1000"
-            value={state.filters.maxPrice}
+            value={state.filters.maxPrice && state.filters.minPrice }
             onChange={(e) => dispatch({
               type: ActionTypes.APPLY_FILTER,
               payload: { maxPrice: Number(e.target.value) }
@@ -190,6 +197,7 @@ function UseReducer() {
         </button>
       </div>
 
+ 
       <div className="products">
         <h3>Товары ({filteredProducts.length})</h3>
         <ul>
@@ -209,7 +217,7 @@ function UseReducer() {
           ))}
         </ul>
       </div>
-
+      
       {/* <div className="cart">
         <h3>Корзина ({totalItems})</h3>
         <ul>
@@ -236,7 +244,7 @@ function UseReducer() {
         <h4>Итого: {totalPrice}$</h4>
       </div> */}
 
-
+     
 <div className={`cart ${state.cart.length > 0 ? 'show' : ''}`}>
   <h3>Корзина ({totalItems})</h3>
   {state.cart.length > 0 ? (

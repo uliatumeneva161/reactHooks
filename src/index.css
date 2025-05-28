@@ -386,3 +386,27 @@ button:focus-visible {
 .read-the-docs {
   color: #888;
 }
+/* Стилизация для кликабельного текста */
+.menu-toggle {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+/* Убираем отступы для элементов меню */
+.menu-items {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Добавьте плавное появление меню (опционально) */
+.menu-items {
+  transition: opacity 0.3s ease;
+}
+
+.menu-items:not(:empty) {
+  opacity: 1;
+}
+
+.menu-items:empty {
+  opacity: 0;
+}

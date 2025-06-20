@@ -62,7 +62,7 @@ function UseContext() {
   return (
     <ThemeProvider>
       <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
-        <h1>Пример использования useContext</h1>
+        <h2>Переключатель тем</h2>
         <ThemeToggle />
         <ThemedBox />
         <p>Попробуйте переключить тему!</p>

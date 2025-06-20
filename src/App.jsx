@@ -3,7 +3,7 @@ import './App.css';
 import UseReducer1 from './components/UseReducer1';
 import UseReducer2 from './components/UseReducer2';
 import UseContext from './components/UseContext';
-
+import UseEffect  from './components/UseEffect';
 function App() {
   const [currentPage, setCurrentPage] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
@@ -23,8 +23,9 @@ function App() {
       { id: 'useReducer2', label: 'Форма регистрации' }
     ],
     context: [
-      { id: 'useContext', label: 'Пример использования' }
-    ]
+      { id: 'useContext', label: 'Переключать тему' }
+    ],
+    effect: [{id: 'useEffect', label: 'Счетчик'}]
   };
 
   return (
@@ -43,6 +44,30 @@ function App() {
             {openMenu === 'reduce' && (
               <div className="dropdown-menu">
                 {menuItems.reduce.map(item => (
+                  <button
+                    key={item.id}
+                    className="nav-link"
+                    onClick={() => handlePageChange(item.id)}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Меню для useEffect */}
+          <div className="menu-group">
+            <button 
+              className="menu-toggle"
+              onClick={() => toggleMenu('effect')}
+              aria-expanded={openMenu === 'effect'}
+            >
+              useEffect
+            </button>
+            {openMenu === 'effect' && (
+              <div className="dropdown-menu">
+                {menuItems.effect.map(item => (
                   <button
                     key={item.id}
                     className="nav-link"
@@ -85,6 +110,7 @@ function App() {
         {currentPage === 'useReducer1' && <UseReducer1 />}
         {currentPage === 'useReducer2' && <UseReducer2 />}
         {currentPage === 'useContext' && <UseContext />}
+        {currentPage === 'useEffect' && <UseEffect />}
       </main>
     </div>
   );

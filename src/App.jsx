@@ -3,7 +3,8 @@ import './App.css';
 import UseReducer1 from './components/UseReducer1';
 import UseReducer2 from './components/UseReducer2';
 import UseContext from './components/UseContext';
-import UseEffect  from './components/UseEffect';
+import UseEffect from './components/UseEffect';
+import LoadingData from './components/LoadingData'
 function App() {
   const [currentPage, setCurrentPage] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
@@ -25,7 +26,8 @@ function App() {
     context: [
       { id: 'useContext', label: 'Переключать тему' }
     ],
-    effect: [{id: 'useEffect', label: 'Счетчик'}]
+    effect: [{ id: 'useEffect', label: 'Счетчик' }],
+    loadData:[{ id: 'loadData', label: 'ЗагрузкаДанных' }]
   };
 
   return (
@@ -103,6 +105,28 @@ function App() {
               </div>
             )}
           </div>
+
+           <div className="menu-group">
+            <button 
+              className="menu-toggle"
+              onClick={() => toggleMenu('loadData')}
+              aria-expanded={openMenu === 'loadData'}
+            >
+              Load
+            </button>
+          {openMenu === 'loadData' && (
+              <div className="dropdown-menu">
+                {menuItems.loadData.map(item => (
+                  <button
+                    key={item.id}
+                    className="nav-link"
+                    onClick={() => handlePageChange(item.id)}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}</div>
         </div>
       </nav>
 
@@ -111,6 +135,7 @@ function App() {
         {currentPage === 'useReducer2' && <UseReducer2 />}
         {currentPage === 'useContext' && <UseContext />}
         {currentPage === 'useEffect' && <UseEffect />}
+        {currentPage === 'loadData' && <LoadingData />}
       </main>
     </div>
   );

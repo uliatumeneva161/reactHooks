@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-export default function DataFetcher() {
+export default function UseEffect2() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api.example.com/data');
+        const response = await fetch('https://api.github.com/users');
         const result = await response.json();
         setData(result);
       } catch (error) {
@@ -24,7 +24,7 @@ export default function DataFetcher() {
   
   return (
     <div>
-      {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : 'Данные не получены'}
+      {data ? <pre>{JSON.stringify(data, 0, 2)}</pre> : 'Данные не получены'}
     </div>
   );
 }

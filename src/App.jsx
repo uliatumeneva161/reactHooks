@@ -4,7 +4,8 @@ import UseReducer1 from './components/UseReducer1';
 import UseReducer2 from './components/UseReducer2';
 import UseContext from './components/UseContext';
 import UseEffect from './components/UseEffect';
-import UseEffect2 from './components/UseEffect2'
+import UseEffect2 from './components/UseEffect2';
+import Promise from './components/Promise'  
 function App() {
   const [currentPage, setCurrentPage] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
@@ -29,7 +30,7 @@ function App() {
     effect: [{ id: 'useEffect', label: 'Счетчик' },
             { id: 'useEffect2', label: 'ЗагрузкаДанных' }
     ],
-    loadData:[{ id: 'useEffect2', label: 'ЗагрузкаДанных' }]
+    promise:[{ id: 'promise', label: 'new Promise' }]
   };
 
   return (
@@ -107,6 +108,29 @@ function App() {
               </div>
             )}
           </div>
+          {/* Меню для Promise */}
+          <div className="menu-group">
+            <button 
+              className="menu-toggle"
+              onClick={() => toggleMenu('context')}
+              aria-expanded={openMenu === 'promise'}
+            >
+              useContext
+            </button>
+            {openMenu === 'promise' && (
+              <div className="dropdown-menu">
+                {menuItems.promise.map(item => (
+                  <button
+                    key={item.id}
+                    className="nav-link"
+                    onClick={() => handlePageChange(item.id)}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </nav>
 
@@ -116,6 +140,7 @@ function App() {
         {currentPage === 'useContext' && <UseContext />}
         {currentPage === 'useEffect' && <UseEffect />}
         {currentPage === 'useEffect2' && <UseEffect2 />}
+        {currentPage === 'promise' && <Promise />}
       </main>
     </div>
   );

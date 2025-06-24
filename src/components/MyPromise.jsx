@@ -12,7 +12,7 @@ const MyPromise = () => {
         if (statusData) {
           resolve({ sms: "Resolve Success"})
         } else {
-          reject({ sms: "Reject UnSuccess"})
+          reject("Reject UnSuccess")
         }
       })
     }, 500)

@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import Description from './Description';
 
 // Начальное состояние
 const initialState = {
@@ -275,7 +276,8 @@ function UseReducer() {
   ) : (
     <p>Корзина пуста</p>
   )}
-</div>
+      </div>
+      <Description children='uuyuy'/>
     </div>
   );
 }

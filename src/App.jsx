@@ -5,7 +5,7 @@ import UseReducer2 from './components/UseReducer2';
 import UseContext from './components/UseContext';
 import UseEffect from './components/UseEffect';
 import UseEffect2 from './components/UseEffect2';
-import Promise from './components/Promise'  
+import MyPromise from './components/MyPromise'  
 function App() {
   const [currentPage, setCurrentPage] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
@@ -112,10 +112,10 @@ function App() {
           <div className="menu-group">
             <button 
               className="menu-toggle"
-              onClick={() => toggleMenu('context')}
+              onClick={() => toggleMenu('promise')}
               aria-expanded={openMenu === 'promise'}
             >
-              useContext
+              Promise
             </button>
             {openMenu === 'promise' && (
               <div className="dropdown-menu">
@@ -140,7 +140,7 @@ function App() {
         {currentPage === 'useContext' && <UseContext />}
         {currentPage === 'useEffect' && <UseEffect />}
         {currentPage === 'useEffect2' && <UseEffect2 />}
-        {currentPage === 'promise' && <Promise />}
+        {currentPage === 'promise' && <MyPromise />}
       </main>
     </div>
   );

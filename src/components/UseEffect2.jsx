@@ -7,23 +7,24 @@ export default function UseEffect2() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api.github.com/users');
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error('Ошибка загрузки:', error);
+        setLoading(true)
+        const otvet = await fetch('https://api.github.com/users')
+        const preobrOtv = await otvet.json()
+        const formatedData = JSON.stringify(preobrOtv,0, 2)
+        setData(formatedData)
+      } catch (e) {
+        console.log(e)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
-
-    fetchData();
-  }, []); // Пустой массив = только при монтировании
-
-  if (loading) return <div>Загрузка...</div>;
+    } // Пустой массив = только при монтировании
+  fetchData()
+  ,[]})
+  // if (loading) return <div>Загрузка...</div>;
   
   return (
     <div>
+      {loading && <div>Загрузка...</div>}
       <Description children='useEffect здесь используется для выполнения 
       побочного эффекта (загрузки данных с API) только один раз при монтировании
        компонента, что обеспечивается пустым массивом зависимостей [] во втором
@@ -32,7 +33,7 @@ export default function UseEffect2() {
         значение) Выполняет запрос к GitHub API Обновляет состояние данными (setData)
         Снимает флаг загрузки в finally блоке (гарантированно даже при ошибке)
         Возвращает разметку с условиями: индикатор загрузки или отображение данных.'/>
-      {data ? <pre>{JSON.stringify(data, 0, 2)}</pre> : 'Данные не получены'}
+      {data ? <pre>{data }</pre> : 'Данные не получены'}
     </div>
   );
 }

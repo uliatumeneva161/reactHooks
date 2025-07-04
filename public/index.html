@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phonebook</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 8px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+        button { margin-left: 10px; }
+        form { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+        input { padding: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Phonebook</h1>
+    <div id="info"></div>
+    <ul id="persons"></ul>
+    
+    <h2>Add new</h2>
+    <form id="addForm">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="number" placeholder="Number" required>
+        <button type="submit">Add</button>
+    </form>
+
+    <script src="app.js"></script>
+</body>
+</html>
